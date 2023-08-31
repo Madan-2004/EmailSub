@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/0ceeca1f1f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Coming soon...</title>
+</head>
+<body>
+    <div class="container">
+        <div class="class">
+            <h4>Coming soon!</h4>
+            <h2>Our Brand New Website<br/> is On It's Way...</h2>
+            <p>Subscribe for more details.</p>
+            <form name="submit-to-google-sheet">
+                <input type="email" name="Email" placeholder="Enter email" value="" id="input">
+                <button id="submit" type="submit"><i class="fa-solid fa-paper-plane"></i></button><br/>
+                <span><h6 id="h6" style="font-size: 20px; margin-top: 10px; font-weight: 300; color: green;"></h6></span>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzNKXGBwU7R9veglBxdf_Ulo-ZsrdBucAAZ4E9yZl0bRqCzKMdYQySTNBRwhor3iVHmlg/exec'
+        const form = document.forms['submit-to-google-sheet']
+        const msg = document.getElementById("h6")
+        var input = document.getElementById("input")
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response =>{
+                msg.innerHTML = "Thank You For Subscribing!"
+                setTimeout(function(){
+                    msg.innerHTML = ""
+                },3000)
+            })
+            form.reset()
+            .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+</body>
+</html>
